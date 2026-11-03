@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import {
-	computed,
-	inject,
-	onBeforeUnmount,
-	onMounted,
-	ref,
-} from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import {
-	TABS_CONTEXT_KEY,
-} from './context'
+import { TABS_CONTEXT_KEY } from './context'
 
-import type {
-	TabProps,
-} from './types'
+import type { TabProps } from './types'
 
 const props = withDefaults(
 	defineProps<TabProps>(),
@@ -22,9 +12,7 @@ const props = withDefaults(
 	},
 )
 
-const context = inject(
-	TABS_CONTEXT_KEY,
-)
+const context = inject(TABS_CONTEXT_KEY)
 
 if (!context) {
 	throw new Error(
@@ -47,29 +35,20 @@ function select() {
 		return
 	}
 
-	context.selectTab(
+	context!.selectTab(
 		props.value,
 	)
 }
 
-function handleKeydown(
-	event: KeyboardEvent,
-) {
-	const isHorizontal =
-		context.orientation.value ===
-		'horizontal'
-
-	const isVertical =
-		context.orientation.value ===
-		'vertical'
+function handleKeydown(event: KeyboardEvent) {
+	const isHorizontal = context!.orientation.value === 'horizontal';
+	const isVertical = context!.orientation.value === 'vertical';
 
 	switch (event.key) {
 		case 'Enter':
 		case ' ':
 			event.preventDefault()
-
 			select()
-
 			break
 
 		case 'ArrowRight':
@@ -79,10 +58,7 @@ function handleKeydown(
 
 			event.preventDefault()
 
-			context.focusNext(
-				props.value,
-			)
-
+			context!.focusNext(props.value)
 			break
 
 		case 'ArrowLeft':
@@ -91,11 +67,7 @@ function handleKeydown(
 			}
 
 			event.preventDefault()
-
-			context.focusPrevious(
-				props.value,
-			)
-
+			context!.focusPrevious(props.value)
 			break
 
 		case 'ArrowDown':
@@ -104,11 +76,7 @@ function handleKeydown(
 			}
 
 			event.preventDefault()
-
-			context.focusNext(
-				props.value,
-			)
-
+			context!.focusNext(props.value)
 			break
 
 		case 'ArrowUp':
@@ -117,25 +85,17 @@ function handleKeydown(
 			}
 
 			event.preventDefault()
-
-			context.focusPrevious(
-				props.value,
-			)
-
+			context!.focusPrevious(props.value)
 			break
 
 		case 'Home':
 			event.preventDefault()
-
-			context.focusFirst()
-
+			context!.focusFirst()
 			break
 
 		case 'End':
 			event.preventDefault()
-
-			context.focusLast()
-
+			context!.focusLast()
 			break
 	}
 }

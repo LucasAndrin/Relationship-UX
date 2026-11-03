@@ -1,10 +1,9 @@
 import { omit } from 'lodash';
 import { defineRelationship } from '@lib/core/relationships';
 
-import type { Task } from '../Task'
 import type { Responsible } from '../Responsible'
 
-export default defineRelationship<Task, Responsible>({
+export default defineRelationship<Responsible>({
 	name: 'Responsáveis',
 	cardinality: 'one',
 
@@ -13,9 +12,9 @@ export default defineRelationship<Task, Responsible>({
 		return module.Responsible;
 	},
 
-	getValue(task) {
-		return task.responsible;
-	},
+	// getValue(task) {
+	// 	return task.responsible;
+	// },
 
 	resolveComponent() {
 		return import('@/components/ResponsiblesList.vue');

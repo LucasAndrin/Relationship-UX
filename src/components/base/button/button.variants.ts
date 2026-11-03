@@ -1,94 +1,106 @@
 import { createVariants } from '@lib/utils'
 
 export const buttonVariants = createVariants({
-	base: [
-		'inline-flex',
-		'items-center',
-		'justify-center',
-		'gap-2',
+    base: [
+        'inline-flex',
+        'items-center',
+        'justify-center',
+        'gap-2',
 
-		'font-medium',
-		'select-none',
+        'font-medium',
+        'select-none',
 
-		'transition-colors',
+        'transition-colors',
+        'outline-none',
+        'cursor-pointer',
 
-		'outline-none',
+        'focus-visible:ring-2',
+        'focus-visible:ring-offset-2',
+        'focus-visible:ring-slate-500',
+        'focus-visible:ring-offset-white',
+        'dark:focus-visible:ring-slate-400',
+        'dark:focus-visible:ring-offset-slate-950',
 
-		'cursor-pointer',
+        'disabled:pointer-events-none',
+        'disabled:cursor-not-allowed',
+        'disabled:opacity-50',
+    ],
 
-		'focus-visible:ring-2',
-		'focus-visible:ring-offset-2',
+    variants: {
+        variant: {
+            filled: [
+                'bg-slate-900',
+                'text-white',
 
-		'disabled:pointer-events-none',
-		'disabled:cursor-not-allowed',
-		'disabled:opacity-50',
-	],
+                'hover:bg-slate-800',
+                'active:bg-slate-950',
 
-	variants: {
-		variant: {
-			filled: [
-				'bg-slate-900',
-				'text-white',
+                'dark:bg-slate-100',
+                'dark:text-slate-900',
+                'dark:hover:bg-slate-200',
+                'dark:active:bg-slate-300',
+            ],
 
-				'hover:bg-slate-800',
-				'active:bg-slate-950',
-			],
+            outlined: [
+                'border',
+                'border-slate-300',
+                'bg-transparent',
+                'text-slate-900',
 
-			outlined: [
-				'border',
-				'border-slate-300',
+                'hover:bg-slate-50',
+                'active:bg-slate-100',
 
-				'bg-transparent',
-				'text-slate-900',
+                'dark:border-slate-700',
+                'dark:text-slate-100',
+                'dark:hover:bg-slate-800',
+                'dark:active:bg-slate-700',
+            ],
 
-				'hover:bg-slate-50',
-				'active:bg-slate-100',
-			],
+            ghost: [
+                'bg-transparent',
+                'text-slate-900',
 
-			ghost: [
-				'bg-transparent',
-				'text-slate-900',
+                'hover:bg-slate-100',
+                'active:bg-slate-200',
 
-				'hover:bg-slate-100',
-				'active:bg-slate-200',
+                'dark:text-slate-100',
+                'dark:hover:bg-slate-800',
+                'dark:active:bg-slate-700',
+            ],
+        },
 
-				'dark:text-slate-100',
-				'hover:dark:bg-slate-700',
-			],
-		},
+        size: {
+            sm: [
+                'h-8',
+                'px-3',
+                'text-sm',
+            ],
 
-		size: {
-			sm: [
-				'h-8',
-				'px-3',
-				'text-sm',
-			],
+            md: [
+                'h-10',
+                'px-4',
+                'text-sm',
+            ],
 
-			md: [
-				'h-10',
-				'px-4',
-				'text-sm',
-			],
+            lg: [
+                'h-12',
+                'px-6',
+                'text-base',
+            ],
+        },
 
-			lg: [
-				'h-12',
-				'px-6',
-				'text-base',
-			],
-		},
+        rounded: {
+            none: 'rounded-none',
+            sm: 'rounded-sm',
+            md: 'rounded-md',
+            lg: 'rounded-lg',
+            full: 'rounded-full',
+        },
+    },
 
-		rounded: {
-			none: 'rounded-none',
-			sm: 'rounded-sm',
-			md: 'rounded-md',
-			lg: 'rounded-lg',
-			full: 'rounded-full',
-		},
-	},
-
-	defaultVariants: {
-		variant: 'filled',
-		size: 'md',
-		rounded: 'md',
-	},
+    defaultVariants: {
+        variant: 'filled',
+        size: 'md',
+        rounded: 'md',
+    },
 })

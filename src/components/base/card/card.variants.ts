@@ -11,12 +11,16 @@ export const cardVariants = createVariants({
 			default: [
 				'bg-white',
 				'shadow-sm',
+				'dark:bg-slate-900',
+				'dark:shadow-slate-200/20'
 			],
 
 			outlined: [
 				'border',
 				'border-slate-200',
 				'bg-white',
+				'dark:border-slate-700',
+				'dark:bg-slate-900'
 			],
 
 			ghost: [

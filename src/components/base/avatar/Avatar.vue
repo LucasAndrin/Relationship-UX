@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { cn } from '@lib/utils'
 
@@ -30,6 +30,11 @@ const showImage = computed(
 function handleImageError() {
 	imageError.value = true
 }
+
+watch(() => props.src, () => {
+	imageError.value = false
+})
+
 </script>
 
 <template>

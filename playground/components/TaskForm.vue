@@ -6,7 +6,7 @@ import { useRelationshipService } from '@lib/core/relationships';
 import { Button, InputForm, TextareaForm } from '@lib/components';
 
 const props = defineProps<{
-  task: Task
+  	task: Task
 }>()
 
 const ignoreResponsibleStatus = ref(false);

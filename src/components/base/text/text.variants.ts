@@ -21,11 +21,11 @@ export const textVariants = createVariants({
 		},
 
 		color: {
-			default: 'text-gray-900',
-			muted: 'text-gray-500',
-			primary: 'text-blue-600',
-			danger: 'text-red-600',
-			success: 'text-green-600',
+			default: 'text-gray-900 dark:text-gray-100',
+			muted: 'text-gray-500 dark:text-gray-400',
+			primary: 'text-blue-600 dark:text-blue-400',
+			danger: 'text-red-600 dark:text-red-400',
+			success: 'text-green-600 dark:text-green-400',
 		},
 
 		align: {
