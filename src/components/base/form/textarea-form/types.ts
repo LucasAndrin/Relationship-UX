@@ -20,6 +20,6 @@ export type TextareaFormProps = {
 	modelValue?: string | number
 	variant?: TextareaFormVariant
 	size?: TextareaFormSize
-	rounded?: InputFormRounded
+	rounded?: TextareaFormRounded
 	invalid?: boolean
 }

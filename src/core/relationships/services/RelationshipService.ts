@@ -8,7 +8,7 @@ import type { WindowId, WindowManagerService } from '../../window-manager';
 type RelationshipOwner<TSource extends object> = EntityConstructor<TSource> & {
 	relationships: Record<
 		string,
-		RelationshipReference<TSource, unknown>
+		RelationshipReference<unknown>
 	>
 }
 

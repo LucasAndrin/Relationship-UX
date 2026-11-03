@@ -1,67 +1,50 @@
-
-import type { EntityConstructor, RelationshipDefinition, RelationshipReference } from '../types'
-
-type CachedRelationshipDefinition = RelationshipDefinition<unknown, unknown>
-
-type RelationshipLoader = () => Promise<unknown>
-
-type CachedEntityConstructor = EntityConstructor<unknown>
+import type { EntityConstructor, RelationshipDefinition, RelationshipReference } from '../types';
 
 export class RelationshipResolver {
-  	private readonly definitions = new WeakMap<
-		RelationshipLoader,
-		Promise<CachedRelationshipDefinition>
+	private readonly definitions = new WeakMap<
+		Function,
+		Promise<unknown>
 	>()
 
 	private readonly entities = new WeakMap<
-		CachedRelationshipDefinition,
-		Promise<CachedEntityConstructor>
+		RelationshipDefinition<unknown>,
+		Promise<unknown>
 	>()
 
-  	async resolve<TSource = unknown, TTarget = unknown>(
-		reference: RelationshipReference<TSource, TTarget>,
-	): Promise<RelationshipDefinition<TSource, TTarget>> {
-		const loader = reference as RelationshipLoader
-
-		const cached = this.definitions.get(loader)
-
+	async resolve<TTarget = unknown>(
+		reference: RelationshipReference<TTarget>,
+	): Promise<RelationshipDefinition<TTarget>> {
+		const cached = this.definitions.get(reference)
 		if (cached) {
-			return cached as Promise<
-			RelationshipDefinition<TSource, TTarget>
-			>
+			return cached as Promise<RelationshipDefinition<TTarget>>
 		}
 
 		const pending = reference().then(module => {
 			return module.default;
 		}).catch((error: unknown) => {
-			this.definitions.delete(loader)
-			throw error;
-		})
+			this.definitions.delete(reference)
+			throw error
+		});
 
-		this.definitions.set(loader, pending as Promise<CachedRelationshipDefinition>)
+		this.definitions.set(reference, pending)
+		return pending;
+  }
 
-		return pending
-	}
-
-	async resolveEntity<
-		TSource = unknown,
-		TTarget = unknown,
-	>(
-		definition: RelationshipDefinition<TSource, TTarget>,
+	async resolveEntity<TTarget = unknown>(
+		definition: RelationshipDefinition<TTarget>,
 	): Promise<EntityConstructor<TTarget>> {
-		const cached = this.entities.get(definition as CachedRelationshipDefinition);
-
+		const key = definition as RelationshipDefinition<unknown>
+		const cached = this.entities.get(key)
 		if (cached) {
 			return cached as Promise<EntityConstructor<TTarget>>
 		}
 
 		const pending = definition.resolveEntity().catch((error: unknown) => {
-			this.entities.delete(definition as CachedRelationshipDefinition);
+			this.entities.delete(key);
 			throw error;
-		});
+		})
 
-		this.entities.set(definition as CachedRelationshipDefinition, pending as Promise<CachedEntityConstructor>);
-
+		this.entities.set(key, pending);
 		return pending;
-  	}
+	}
 }

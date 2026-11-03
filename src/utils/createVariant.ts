@@ -2,14 +2,9 @@ import { cn, type ClassValue } from './cn'
 
 type VariantValue = string | number | boolean
 
-export type VariantSchema = Record<
-	string,
-	Record<string, ClassValue|ClassValue[]>
->
+export type VariantSchema = Record<string, Record<string, ClassValue|ClassValue[]>>
 
-export interface CompoundVariant<
-	TVariants extends VariantSchema
-> {
+export interface CompoundVariant<TVariants extends VariantSchema> {
 	class: ClassValue
 
 	variants: Partial<{
@@ -19,9 +14,7 @@ export interface CompoundVariant<
 	}>
 }
 
-export interface VariantDefinition<
-	TVariants extends VariantSchema = VariantSchema
-> {
+export interface VariantDefinition<TVariants extends VariantSchema = VariantSchema> {
 	base?: ClassValue|ClassValue[]
 
 	variants: TVariants
@@ -33,9 +26,7 @@ export interface VariantDefinition<
 	compoundVariants?: CompoundVariant<TVariants>[]
 }
 
-export interface VariantComposer<
-	TVariants extends VariantSchema
-> {
+export interface VariantComposer<TVariants extends VariantSchema> {
 	compose(
 		props?: Record<string, VariantValue | undefined> & {
 			class?: ClassValue
@@ -49,9 +40,7 @@ export interface VariantComposer<
 	defaultVariants: VariantDefinition<TVariants>['defaultVariants']
 }
 
-export function createVariants<
-	TVariants extends VariantSchema
->(
+export function createVariants<TVariants extends VariantSchema>(
 	definition: VariantDefinition<TVariants>,
 ): VariantComposer<TVariants> {
 	function compose(
@@ -69,22 +58,14 @@ export function createVariants<
 		}
 
 		for (const variantName in definition.variants) {
-			const variantGroup =
-				definition.variants[variantName]
+			const variantGroup = definition.variants[variantName];
 
-			const value =
-				props[variantName] ??
-				definition.defaultVariants?.[
-					variantName as keyof TVariants
-				]
-
+			const value = props[variantName] ?? definition.defaultVariants?.[variantName as keyof TVariants];
 			if (value === undefined) {
 				continue
 			}
 
-			const variantClass =
-				variantGroup[String(value)]
-
+			const variantClass = variantGroup?.[String(value)];
 			if (variantClass) {
 				if (Array.isArray(variantClass)) {
 					classes.push(...variantClass);
@@ -95,14 +76,9 @@ export function createVariants<
 		}
 
 		for (const compound of definition.compoundVariants ?? []) {
-			const matches = Object.entries(
-				compound.variants,
-			).every(([key, value]) => {
+			const matches = Object.entries(compound.variants).every(([key, value]) => {
 				return (
-					(props[key] ??
-						definition.defaultVariants?.[
-							key as keyof TVariants
-						]) === value
+					(props[key] ?? definition.defaultVariants?.[key as keyof TVariants]) === value
 				)
 			})
 
@@ -120,11 +96,8 @@ export function createVariants<
 
 	return {
 		compose,
-
 		definition,
-
 		variants: definition.variants,
-
 		defaultVariants: definition.defaultVariants,
 	}
 }

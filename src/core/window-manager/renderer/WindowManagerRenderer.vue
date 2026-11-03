@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
             :opacity="overlayWindow.overlay?.opacity"
             :blur="overlayWindow.overlay?.blur"
             :close-on-click="overlayWindow.overlay?.closeOnClick"
-            class="!absolute"
+            class="absolute!"
             :style="{ zIndex: overlayWindow.zIndex - 1 }"
             @click="onClickOverlayWindow"
         />

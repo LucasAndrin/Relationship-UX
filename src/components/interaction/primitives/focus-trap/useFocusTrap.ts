@@ -52,7 +52,7 @@ export function useFocusTrap(
 		const focusable = getFocusableElements()
 
 		if (focusable.length > 0) {
-			focusable[0].focus()
+			focusable[0]!.focus()
 			return
 		}
 
@@ -81,13 +81,13 @@ export function useFocusTrap(
 
 		if (event.shiftKey && document.activeElement === first) {
 			event.preventDefault()
-			last.focus()
+			last!.focus()
 			return
 		}
 
 		if (!event.shiftKey && document.activeElement === last) {
 			event.preventDefault()
-			first.focus()
+			first!.focus()
 		}
 	}
 

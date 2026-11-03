@@ -125,7 +125,7 @@ function focusNext(currentValue: string) {
 	}
 	const currentIndex = enabledTabs.findIndex(([value]) => value === currentValue)
 	const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % enabledTabs.length
-	activateTab(enabledTabs[nextIndex][0])
+	activateTab(enabledTabs[nextIndex]![0])
 }
 
 function focusPrevious(currentValue: string) {
@@ -135,7 +135,7 @@ function focusPrevious(currentValue: string) {
 	}
 	const currentIndex = enabledTabs.findIndex(([value]) => value === currentValue)
 	const previousIndex = currentIndex === -1 ? enabledTabs.length - 1 : (currentIndex - 1 + enabledTabs.length) % enabledTabs.length
-	activateTab(enabledTabs[previousIndex][0])
+	activateTab(enabledTabs[previousIndex]![0])
 }
 
 function focusFirst() {
