@@ -1,4 +1,4 @@
-import BaseEntity from '@lib/core/relationships/types/BaseEntity';
+import { BaseEntity } from '@lib/core/relationships';
 
 export class Responsible extends BaseEntity {
 	public id?: string;

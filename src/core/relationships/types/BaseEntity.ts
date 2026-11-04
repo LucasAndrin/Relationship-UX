@@ -1,4 +1,4 @@
-export default abstract class BaseEntity {
+export abstract class BaseEntity {
 	static create<T extends BaseEntity>(
 		this: new () => T,
 		attributes?: Partial<T>
