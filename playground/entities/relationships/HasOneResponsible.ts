@@ -4,7 +4,7 @@ import { defineRelationship } from '@lib/core/relationships';
 import type { Responsible } from '../Responsible'
 
 export default defineRelationship<Responsible>({
-	name: 'Responsáveis',
+	name: 'Responsible',
 	cardinality: 'one',
 
 	async resolveEntity() {

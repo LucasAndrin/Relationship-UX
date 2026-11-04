@@ -7,7 +7,8 @@ export type EntityConstructor<TEntity = unknown> = abstract new (...args: never[
 
 export type AsyncEntityResolver<TEntity = unknown> = () => Promise<EntityConstructor<TEntity>>;
 
-export type RelationshipMode = 'select' | 'view' | 'edit'
+// export type RelationshipMode = 'select' | 'view' | 'edit'
+export type RelationshipMode = string
 
 export type ComponentModule = {
   	default: Component

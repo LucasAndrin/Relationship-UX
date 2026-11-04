@@ -1,19 +1,57 @@
 {
   "name": "relationship-ux",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./core/component-stack": {
+      "types": "./dist/core/component-stack/index.d.ts",
+      "import": "./dist/core/component-stack/index.js"
+    },
+    "./core/relationships": {
+      "types": "./dist/core/relationships/index.d.ts",
+      "import": "./dist/core/relationships/index.js"
+    },
+    "./core/window-manager": {
+      "types": "./dist/core/window-manager/index.d.ts",
+      "import": "./dist/core/window-manager/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
+    },
+    "./main.css": "./dist/main.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite --config playground/vite.config.ts",
-    "build": "run-p type-check build-only",
     "preview": "vite preview",
+    "build": "run-s type-check build-only",
     "build-only": "vite build --config vite.lib.config.ts",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --noEmit -p tsconfig.lib.json"
   },
   "dependencies": {
-    "lodash": "^4.18.1",
-    "pinia": "^4.0.3",
-    "vue": "^3.5.42"
+    "lodash": "^4.18.1"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0",
+    "pinia": "^4.0.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.4",
@@ -28,7 +66,9 @@
     "vite": "^8.2.2",
     "vite-plugin-dts": "^5.1.2",
     "vite-plugin-vue-devtools": "^8.2.1",
-    "vue-tsc": "^3.3.11"
+    "vue-tsc": "^3.3.11",
+    "vue": "^3.5.42",
+    "pinia": "^4.0.3"
   },
   "engines": {
     "node": "^22.18.0 || >=24.12.0"

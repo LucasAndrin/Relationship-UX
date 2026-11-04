@@ -25,9 +25,26 @@ export default defineConfig({
 
     build: {
         lib: {
-            entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+            entry: {
+                index: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+                'core/component-stack/index': fileURLToPath(
+                    new URL('./src/core/component-stack/index.ts', import.meta.url),
+                ),
+                'core/relationships/index': fileURLToPath(
+                    new URL('./src/core/relationships/index.ts', import.meta.url),
+                ),
+                'core/window-manager/index': fileURLToPath(
+                    new URL('./src/core/window-manager/index.ts', import.meta.url),
+                ),
+                'components/index': fileURLToPath(
+                    new URL('./src/components/index.ts', import.meta.url),
+                ),
+                'utils/index': fileURLToPath(
+                    new URL('./src/utils/index.ts', import.meta.url),
+                ),
+            },
             formats: ['es'],
-            fileName: 'index',
+            fileName: (_format, entryName) => `${entryName}.js`,
             cssFileName: 'main',
         },
         rollupOptions: {
