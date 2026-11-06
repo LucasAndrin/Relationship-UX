@@ -7,7 +7,7 @@ export const dividerVariants = createVariants({
 		orientation: {
 			horizontal: 'h-px w-full',
 
-			vertical: 'h-full w-px',
+			vertical: 'h-full w-px self-stretch',
 		},
 	},
 
