@@ -23,9 +23,7 @@ const emit = defineEmits<{
 	'update:modelValue': [
 		value: boolean,
 	]
-
 	open: []
-
 	close: []
 }>()
 
@@ -112,15 +110,9 @@ onBeforeUnmount(() => {
 
 <template>
 	<Portal>
-		<div
-			v-if="modelValue"
-			class="fixed inset-0 z-50 flex items-center justify-center p-4"
-		>
+		<div v-if="modelValue" class="fixed inset-0 z-50 flex items-center justify-center p-4">
 			<Overlay
-				:close-on-click="
-					!locked
-					&& closeOnOverlay
-				"
+				:close-on-click="!locked && closeOnOverlay"
 				@click="handleOverlayClick"
 			/>
 

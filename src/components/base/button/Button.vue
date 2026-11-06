@@ -36,25 +36,10 @@ const classes = computed(() =>
 	<component
 		:is="as"
 		v-bind="$attrs"
-
-		:type="
-			as === 'button'
-				? type
-				: undefined
-		"
-
-		:disabled="
-			as === 'button'
-				? disabled || loading
-				: undefined
-		"
-
-		:aria-disabled="
-			disabled || loading
-		"
-
+		:type="as === 'button' ? type : undefined"
+		:disabled="as === 'button' ? disabled || loading : undefined"
+		:aria-disabled="disabled || loading"
 		:aria-busy="loading"
-
 		:class="classes"
 	>
 		<span

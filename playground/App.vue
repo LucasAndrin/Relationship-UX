@@ -30,11 +30,11 @@ const verticalTab = ref('overview')
 
 const { open } = useWindowManager();
 
-const task = new Task(
-	'task-1',
-	'Implementar relacionamentos',
-	'Testar a comunicação entre janelas.',
-);
+const task = new Task({
+	id: 'task-1',
+	title: 'Implementar relacionamentos',
+	description: 'Testar a comunicação entre janelas.',
+});
 function openTaskForm() {
 	open({
 		title: 'Editar tarefa',
@@ -183,15 +183,8 @@ function toggleTheme() {
 					</Surface>
 
 					<Surface class="flex flex-wrap gap-3 p-6">
-
-						<Button disabled>
-							Disabled
-						</Button>
-
-						<Button loading>
-							Loading
-						</Button>
-
+						<Button disabled>Disabled</Button>
+						<Button loading>Loading</Button>
 					</Surface>
 				</section>
 
@@ -271,7 +264,6 @@ function toggleTheme() {
 					</div>
 
 					<Card>
-
 						<template #header>
 							<Text variant="subtitle">
 								Card com Slots
@@ -293,7 +285,6 @@ function toggleTheme() {
 								</Button>
 							</div>
 						</template>
-
 					</Card>
 				</section>
 
@@ -308,35 +299,27 @@ function toggleTheme() {
 					</Text>
 
 					<Surface class="flex flex-wrap items-center gap-3 p-6">
-
 						<Badge>
 							Default
 						</Badge>
-
 						<Badge variant="secondary">
 							Secondary
 						</Badge>
-
 						<Badge variant="success">
 							Success
 						</Badge>
-
 						<Badge variant="warning">
 							Warning
 						</Badge>
-
 						<Badge variant="danger">
 							Danger
 						</Badge>
-
 						<Badge variant="info">
 							Info
 						</Badge>
-
 						<Badge variant="outline">
 							Outline
 						</Badge>
-
 					</Surface>
 
 					<Surface class="flex items-center gap-3 p-6">
