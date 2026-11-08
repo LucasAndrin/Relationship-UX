@@ -20,8 +20,10 @@ import {
 
 import TaskForm from './components/TaskForm.vue';
 import { Task } from './entities/Task';
+import Popover from '@lib/components/interaction/popover/Popover.vue';
 
 const isOpen = ref(false);
+const isPopoverOpen = ref(false);
 const isShowingWindows = ref(false);
 
 const horizontalTab = ref('overview')
@@ -342,39 +344,21 @@ function toggleTheme() {
 
 				<!-- Avatar -->
 				<section class="flex flex-col gap-4">
-					<Text
-						as="h2"
-						variant="subtitle"
-					>
+					<Text as="h2" variant="subtitle">
 						Avatar
 					</Text>
 
 					<Surface class="flex flex-wrap items-center gap-4 p-6">
+						<Avatar size="sm" fallback="LA"/>
 
-						<Avatar
-							size="sm"
-							fallback="LA"
-						/>
+						<Avatar size="md" fallback="LA"/>
 
-						<Avatar
-							size="md"
-							fallback="LA"
-						/>
+						<Avatar size="lg" fallback="LA"/>
 
-						<Avatar
-							size="lg"
-							fallback="LA"
-						/>
-
-						<Avatar
-							size="xl"
-							fallback="LA"
-						/>
-
+						<Avatar size="xl" fallback="LA"/>
 					</Surface>
 
 					<Surface class="flex items-center gap-4 p-6">
-
 						<Avatar
 							src="https://i.pravatar.cc/150?img=12"
 							alt="Avatar de exemplo"
@@ -391,7 +375,6 @@ function toggleTheme() {
 								Administrador
 							</Text>
 						</div>
-
 					</Surface>
 				</section>
 
@@ -454,7 +437,6 @@ function toggleTheme() {
 
 					</Surface>
 				</section>
-
 
 				<!-- Composição -->
 				<section class="flex flex-col gap-4">
@@ -546,6 +528,34 @@ function toggleTheme() {
 							</div>
 						</div>
 					</Modal>
+
+					<Popover
+						v-model="isPopoverOpen"
+						placement="bottom"
+						align="start"
+						variant="filled"
+						size="md"
+					>
+						<template #trigger="{ referenceProps, toggle }">
+							<Button
+								v-bind="referenceProps"
+								type="button"
+								@click="toggle"
+							>
+								Abrir Popover
+							</Button>
+						</template>
+
+						<div class="flex flex-col gap-2">
+							<h3 class="font-semibold">
+								Meu Popover
+							</h3>
+
+							<p class="text-sm text-slate-500">
+								Este é um exemplo de conteúdo.
+							</p>
+						</div>
+					</Popover>
 				</section>
 
 				<section class="flex flex-col gap-4">

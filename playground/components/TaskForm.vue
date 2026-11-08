@@ -40,7 +40,7 @@ function saveTask() {
 	// props.task.description = form.description
 	// props.task.responsible = form.responsible
 
-	console.log('Task saved:', form)
+	// console.log('Task saved:', form)
 }
 </script>
 
