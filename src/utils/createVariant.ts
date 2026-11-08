@@ -65,7 +65,7 @@ export type VariantComposer<TVariants extends VariantSchema> = {
     compoundVariants?: CompoundVariant<TVariants>[]
 
 	compose(
-		props?: Record<string, VariantValue | undefined> & {
+		props?: Record<string, VariantValue | unknown> & {
 			class?: ClassValue
 		},
 	): string

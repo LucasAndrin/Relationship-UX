@@ -1,64 +1,81 @@
-export const inputBaseClasses = [
-	'block',
-	'w-full',
+export const formControlBaseClasses = [
+    'w-full',
 
-	'font-normal',
-	'outline-none',
+    'font-normal',
+    'outline-none',
 
-	'transition-colors',
+    'transition-colors',
+    'duration-150',
 
-	'placeholder:text-slate-400',
+    'placeholder:text-slate-400',
+    'dark:placeholder:text-slate-500',
 
-	'focus-visible:ring-2',
-	'focus-visible:ring-slate-900/20',
-	'focus-visible:border-slate-500',
+    'focus:border-slate-400',
+    'focus:ring-2',
+    'focus:ring-slate-900/10',
 
-	'disabled:cursor-not-allowed',
-	'disabled:opacity-50',
+    'dark:focus:border-slate-500',
+    'dark:focus:ring-white/10',
 
-	'read-only:cursor-default',
+    'disabled:cursor-not-allowed',
+    'disabled:opacity-50',
+
+    'read-only:cursor-default',
 ]
 
-export const inputVariantFillledClasses = [
-	'border',
-	'border-slate-200',
+export const inputBaseClasses = [
+    ...formControlBaseClasses,
+    'block',
+]
 
-	'bg-slate-100',
-	'text-slate-900',
+export const inputVariantFilledClasses = [
+    'border',
+    'border-slate-200',
 
-	'hover:bg-slate-50',
-	'focus:bg-white',
+    'bg-slate-100',
+    'text-slate-900',
 
-	'dark:border-slate-800',
+    'hover:bg-slate-50',
+    'focus:bg-white',
+
+    'dark:border-slate-800',
+    'dark:bg-slate-800/60',
+    'dark:text-slate-100',
+    'dark:hover:bg-slate-800',
+    'dark:focus:bg-slate-900',
 ]
 
 export const inputVariantOutlinedClasses = [
-	'border',
-	'border-slate-300',
+    'border',
+    'border-slate-300',
 
-	'bg-slate-200',
-	'bg-opacity-20',
+    'bg-white',
+    'text-slate-900',
 
-	'text-slate-900',
-	'dark:text-slate-200',
+    'hover:border-slate-400',
 
-	'hover:border-slate-400',
-
-	'dark:border-slate-700',
-	'dark:hover:border-slate-600',
+    'dark:border-slate-700',
+    'dark:bg-slate-900',
+    'dark:text-slate-100',
+    'dark:hover:border-slate-600',
 ]
 
 export const inputVariantGhostClasses = [
-	'border',
-	'border-transparent',
+    'border',
+    'border-transparent',
 
-	'bg-transparent',
-	'text-slate-900',
-	'dark:text-slate-200',
+    'bg-transparent',
+    'text-slate-900',
 
-	'hover:bg-slate-100',
-	'hover:text-slate-900',
+    'hover:border-slate-200',
+    'hover:bg-slate-100',
 
-	'focus:bg-white',
-	'focus:text-slate-900',
+    'focus:border-slate-300',
+    'focus:bg-white',
+
+    'dark:text-slate-100',
+    'dark:hover:border-slate-700',
+    'dark:hover:bg-slate-800/60',
+    'dark:focus:border-slate-600',
+    'dark:focus:bg-slate-900',
 ]

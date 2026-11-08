@@ -1,54 +1,54 @@
-import { createVariants } from '@lib/utils'
-import { inputBaseClasses, inputVariantFillledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants';
+import { createVariants } from '@lib/utils';
+import { inputBaseClasses, inputVariantFilledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants';
 
 export const textareaVariants = createVariants({
-  base: [
-		...inputBaseClasses,
-		'resize-y',
-  ],
+    base: [
+        ...inputBaseClasses,
+        'resize-y',
+    ],
 
-  variants: {
-		variant: {
-			filled: inputVariantFillledClasses,
-			outlined: inputVariantOutlinedClasses,
-			ghost: inputVariantGhostClasses,
-		},
+    variants: {
+        variant: {
+            filled: inputVariantFilledClasses,
+            outlined: inputVariantOutlinedClasses,
+            ghost: inputVariantGhostClasses,
+        },
 
-		size: {
-			sm: [
-				'min-h-16',
-				'px-3',
-				'py-2',
-				'text-sm',
-			],
+        size: {
+            sm: [
+                'min-h-16',
+                'px-3',
+                'py-2',
+                'text-sm',
+            ],
 
-			md: [
-				'min-h-24',
-				'px-3',
-				'py-2',
-				'text-sm',
-			],
+            md: [
+                'min-h-24',
+                'px-3',
+                'py-2',
+                'text-sm',
+            ],
 
-			lg: [
-				'min-h-32',
-				'px-4',
-				'py-3',
-				'text-base',
-			],
-		},
+            lg: [
+                'min-h-32',
+                'px-4',
+                'py-3',
+                'text-base',
+            ],
+        },
 
-		rounded: {
-			none: 'rounded-none',
-			sm: 'rounded-sm',
-			md: 'rounded-md',
-			lg: 'rounded-lg',
-			full: 'rounded-full',
-		},
-	},
+        rounded: {
+            none: 'rounded-none',
+            sm: 'rounded-sm',
+            md: 'rounded-md',
+            lg: 'rounded-lg',
+            full: 'rounded-2xl',
+        },
+    },
 
-	defaultVariants: {
-		variant: 'outlined',
-		size: 'md',
-		rounded: 'md',
-	},
-})
+    defaultVariants: {
+        variant: 'outlined',
+        size: 'md',
+        rounded: 'md',
+    },
+});

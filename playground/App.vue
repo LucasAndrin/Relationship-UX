@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useWindowManager, WindowManagerRenderer } from '@lib/core/window-manager';
 
 import {
@@ -16,11 +16,13 @@ import {
 	Surface,
 	Text,
 	Modal,
+	Popover,
+	Input,
+	Select,
 } from '@lib/components';
 
 import TaskForm from './components/TaskForm.vue';
 import { Task } from './entities/Task';
-import Popover from '@lib/components/interaction/popover/Popover.vue';
 
 const isOpen = ref(false);
 const isPopoverOpen = ref(false);
@@ -56,19 +58,33 @@ function toggleTheme() {
 	isDarkTheme.value = !isDarkTheme.value;
 }
 
+watchEffect(() => {
+	if (isDarkTheme.value) {
+		document.body.classList.add('dark');
+	} else {
+		document.body.classList.remove('dark');
+	}
+})
+
+/**
+ * Tests Select.vue
+ */
+const selectedFruit = ref<string|null>(null);
+const fruitOptions = [
+    { label: 'Maçã', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Laranja', value: 'orange' },
+    { label: 'Uva', value: 'grape' },
+    { label: 'Morango', value: 'strawberry' },
+    { label: 'Abacaxi', value: 'pineapple', disabled: true },
+];
+
 </script>
 
 <template>
- 	<div
-		:class="[
-            'p-10 transition-colors duration-200',
-			{
-				'h-dvh': isShowingWindows,
-				'dark bg-slate-950 text-slate-100': isDarkTheme,
-				'bg-slate-50 text-slate-900': !isDarkTheme,
-			}
-		]"
-	>
+ 	<div class="p-10 transition-colors duration-200" :class="{
+		'h-dvh': isShowingWindows
+	}">
 		<div class="mx-auto flex h-full w-full max-w-5xl flex-col gap-12">
 			<header class="flex shrink-0 flex-col gap-4">
 				<div class="flex items-center justify-between">
@@ -696,8 +712,23 @@ function toggleTheme() {
 						</Tabs>
 					</div>
 				</section>
+
+				<section class="flex flex-col gap-4">
+					<Text as="h2" variant="subtitle">Form</Text>
+
+					<Surface class="flex flex-col gap-2 p-3">
+						<Select
+							v-model="selectedFruit"
+							:options="fruitOptions"
+							placeholder="Selecione uma fruta"
+							search-placeholder="Pesquisar frutas..."
+							clearable
+						/>
+
+						<Input placeholder="teste" />
+					</Surface>
+				</section>
 			</div>
 		</div>
   	</div>
 </template>
-
