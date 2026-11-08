@@ -1,4 +1,4 @@
-export const inputFormBaseClasses = [
+export const inputBaseClasses = [
 	'block',
 	'w-full',
 
@@ -19,7 +19,7 @@ export const inputFormBaseClasses = [
 	'read-only:cursor-default',
 ]
 
-export const inputFormVariantFillledClasses = [
+export const inputVariantFillledClasses = [
 	'border',
 	'border-slate-200',
 
@@ -32,7 +32,7 @@ export const inputFormVariantFillledClasses = [
 	'dark:border-slate-800',
 ]
 
-export const inputFormVariantOutlinedClasses = [
+export const inputVariantOutlinedClasses = [
 	'border',
 	'border-slate-300',
 
@@ -48,7 +48,7 @@ export const inputFormVariantOutlinedClasses = [
 	'dark:hover:border-slate-600',
 ]
 
-export const inputFormVariantGhostClasses = [
+export const inputVariantGhostClasses = [
 	'border',
 	'border-transparent',
 

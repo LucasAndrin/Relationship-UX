@@ -1,14 +1,14 @@
 import { createVariants } from '@lib/utils'
-import { inputFormBaseClasses, inputFormVariantFillledClasses, inputFormVariantGhostClasses, inputFormVariantOutlinedClasses } from '../form.variants'
+import { inputBaseClasses, inputVariantFillledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants'
 
-export const inputFormVariants = createVariants({
-	base: inputFormBaseClasses,
+export const inputVariants = createVariants({
+	base: inputBaseClasses,
 
 	variants: {
 		variant: {
-			filled: inputFormVariantFillledClasses,
-			outlined: inputFormVariantOutlinedClasses,
-			ghost: inputFormVariantGhostClasses,
+			filled: inputVariantFillledClasses,
+			outlined: inputVariantOutlinedClasses,
+			ghost: inputVariantGhostClasses,
 		},
 
 		size: {

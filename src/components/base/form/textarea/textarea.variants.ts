@@ -1,19 +1,17 @@
 import { createVariants } from '@lib/utils'
-import { inputFormBaseClasses, inputFormVariantFillledClasses, inputFormVariantGhostClasses, inputFormVariantOutlinedClasses } from '../form.variants';
+import { inputBaseClasses, inputVariantFillledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants';
 
-export const textareaFormVariants = createVariants({
+export const textareaVariants = createVariants({
   base: [
-		...inputFormBaseClasses,
+		...inputBaseClasses,
 		'resize-y',
   ],
 
   variants: {
 		variant: {
-			filled: inputFormVariantFillledClasses,
-
-			outlined: inputFormVariantOutlinedClasses,
-
-			ghost: inputFormVariantGhostClasses,
+			filled: inputVariantFillledClasses,
+			outlined: inputVariantOutlinedClasses,
+			ghost: inputVariantGhostClasses,
 		},
 
 		size: {

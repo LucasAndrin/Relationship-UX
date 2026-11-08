@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { cn } from '@lib/utils'
-import { inputFormVariants } from './input-form.variants'
-import type { InputFormProps } from './types'
+import { inputVariants } from './input.variants'
+import type { InputProps } from './types'
 
 const props = withDefaults(
-	defineProps<InputFormProps>(),
+	defineProps<InputProps>(),
 	{
 		type: 'text',
 		disabled: false,
@@ -28,7 +28,7 @@ const classes = computed(() => {
 		]);
 	}
 	return cn(
-		inputFormVariants.compose(props),
+		inputVariants.compose(props),
 		props.class,
 		...invalidClasses,
 	)

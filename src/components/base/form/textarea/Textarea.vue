@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { cn } from '@lib/utils'
-import type { TextareaFormProps } from './types'
-import { textareaFormVariants } from './textarea-form.variants'
+import type { TextareaProps } from './types'
+import { textareaVariants } from './textarea.variants'
 
 const props = withDefaults(
-	defineProps<TextareaFormProps>(),
+	defineProps<TextareaProps>(),
 	{
 		invalid: false,
 	},
@@ -25,7 +25,7 @@ const classes = computed(() => {
 		]);
 	}
 	return cn(
-		textareaFormVariants.compose(props),
+		textareaVariants.compose(props),
 		props.class,
 		...invalidClasses,
 	)

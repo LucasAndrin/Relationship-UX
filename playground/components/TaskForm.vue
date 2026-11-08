@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import type { Task } from '../entities/Task'
 import type { Responsible } from '../entities/Responsible'
 import { useRelationshipService } from '@lib/core/relationships';
-import { Button, InputForm, TextareaForm } from '@lib/components';
+import { Button, Input, Textarea } from '@lib/components';
 
 const props = defineProps<{
   	task: Task
@@ -58,7 +58,7 @@ function saveTask() {
 				Título
 			</label>
 
-			<InputForm
+			<Input
 				id="task-title"
 				v-model="form.title"
 				required
@@ -70,7 +70,7 @@ function saveTask() {
 				Descrição
 			</label>
 
-			<TextareaForm
+			<Textarea
 				id="task-description"
 				v-model="form.description"
 				as="textarea"

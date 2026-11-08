@@ -1,36 +1,28 @@
-export type InputFormVariant =
+export type InputVariant =
 	| 'filled'
 	| 'outlined'
 	| 'ghost'
 
-export type InputFormSize =
+export type InputSize =
 	| 'sm'
 	| 'md'
 	| 'lg'
 
-export type InputFormRounded =
+export type InputRounded =
 	| 'none'
 	| 'sm'
 	| 'md'
 	| 'lg'
 	| 'full'
 
-export type InputFormProps = {
+export type InputProps = {
 	class?: string
-
 	modelValue?: string | number
-
-	variant?: InputFormVariant
-
-	size?: InputFormSize
-
-	rounded?: InputFormRounded
-
+	variant?: InputVariant
+	size?: InputSize
+	rounded?: InputRounded
 	type?: string
-
 	disabled?: boolean
-
 	readonly?: boolean
-
 	invalid?: boolean
 }
