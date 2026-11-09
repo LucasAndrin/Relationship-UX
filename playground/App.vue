@@ -109,7 +109,7 @@ const fruitOptions = [
 			</header>
 
 			<div v-if="isShowingWindows" class="relative min-h-0 flex-1">
-				<WindowManagerRenderer/>
+				<WindowManagerRenderer variant="outlined"/>
 			</div>
 
 			<div v-else class="mx-auto flex max-w-5xl flex-col gap-12">
@@ -580,7 +580,7 @@ const fruitOptions = [
 					</p>
 
 					<div class="mt-8 rounded-lg border bg-white">
-						<Tabs v-model="horizontalTab">
+						<Tabs v-model="horizontalTab" variant="ghost">
 							<TabList class="border-b">
 								<Tab value="overview">
 									Overview

@@ -1,25 +1,31 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject } from 'vue';
+import { TABS_CONTEXT_KEY } from './context';
+import type { TabPanelProps } from './types';
+import { tabPanelVariants } from './variants/tab-panel.variants';
+import { cn } from '@lib/utils';
 
-import { TABS_CONTEXT_KEY } from './context'
+const props = withDefaults(defineProps<TabPanelProps>(), {
+	variant: 'filled',
+});
 
-import type { TabPanelProps } from './types'
-
-const props = defineProps<TabPanelProps>()
-
-const context = inject(TABS_CONTEXT_KEY)
-
+const context = inject(TABS_CONTEXT_KEY);
 if (!context) {
-	throw new Error(
-		'[Tabs] TabPanel must be used inside <Tabs>.',
-	)
+	throw new Error('[Tabs] TabPanel must be used inside <Tabs>.');
 }
 
-const active = computed(() => context.isActive(props.value))
+const active = computed(() => context.isActive(props.value));
+
+const classes = computed(() => cn(
+	tabPanelVariants.compose({
+		variant: props.variant,
+	}),
+	props.class,
+))
 </script>
 
 <template>
-	<div v-if="active" role="tabpanel" :class="props.class" tabindex="0">
+	<div v-if="active" role="tabpanel" :class="classes" tabindex="0">
 		<slot />
 	</div>
 </template>
