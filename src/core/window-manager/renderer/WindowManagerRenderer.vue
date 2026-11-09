@@ -4,6 +4,14 @@ import type { WindowId, WindowPosition, WindowSize } from '../types'
 import { useWindowManager } from '../composables/useWindowManager'
 import Window from '@lib/components/interaction/window/Window.vue'
 import Overlay from '@lib/components/interaction/primitives/overlay/Overlay.vue'
+import type { WindowProps } from '@lib/components'
+import { windowVariants } from '@lib/components/interaction/window/window.variants'
+
+const props = withDefaults(defineProps<Pick<WindowProps, 'variant'|'rounded'|'shadow'>>(), {
+    variant: windowVariants.defaultVariants?.variant,
+    rounded: windowVariants.defaultVariants?.rounded,
+    shadow: windowVariants.defaultVariants?.shadow,
+});
 
 const {
     windows,
@@ -97,6 +105,7 @@ onBeforeUnmount(() => {
 
         <Window
             v-for="window in windows"
+            v-bind="props"
             :key="window.id"
             :title="window.title"
             :position="window.position"

@@ -5,6 +5,25 @@ export type WindowBounds = {
     height: number
 }
 
+export type WindowVariant =
+    | 'filled'
+    | 'outlined'
+    | 'ghost';
+
+export type WindowRounded =
+    | 'none'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'full';
+
+export type WindowShadow =
+    | 'none'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl';
+
 export type WindowProps = {
     title?: string
     position: WindowPosition
@@ -15,5 +34,8 @@ export type WindowProps = {
     draggable?: boolean
     resizable?: boolean
     bounds: WindowBounds
+    variant?: WindowVariant
+    rounded?: WindowRounded
+    shadow?: WindowShadow
     class?: string
 }

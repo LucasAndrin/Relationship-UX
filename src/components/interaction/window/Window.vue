@@ -7,6 +7,7 @@ import { useWindowDrag } from './useWindowDrag';
 import { useWindowResize } from './useWindowResize';
 
 import Button from '../../base/button/Button.vue';
+import { windowVariants } from './window.variants.ts';
 
 const props = withDefaults(defineProps<WindowProps>(), {
 	title: 'Window',
@@ -75,20 +76,21 @@ const style = computed(() => {
         zIndex: props.zIndex,
     }
 });
+
+const classes = computed(() => cn(
+	windowVariants.compose(props),
+	props.class,
+));
 </script>
 
 <template>
 	<section
 		:style="style"
-		:class="cn(
-			'absolute flex flex-col overflow-hidden',
-			'rounded-lg border bg-white dark:border-slate-600 dark:bg-slate-900 shadow-xl',
-			props.class,
-		)"
+		:class="classes"
 		@mousedown="emit('focus')"
 	>
 		<header
-			class="flex h-10 shrink-0 items-center justify-between border-b dark:border-slate-600 px-3"
+			class="flex h-10 shrink-0 items-center justify-between border-b border-slate-200 px-3 dark:border-slate-700"
 			:class="{
 				'cursor-move': draggable && !maximized && !dragging,
 				'cursor-default': !draggable || maximized,
@@ -98,7 +100,7 @@ const style = computed(() => {
 		>
 			<div class="min-w-0 flex-1">
 				<slot name="header">
-					<span class="truncate font-medium dark:text-slate-100">
+					<span class="truncate font-medium text-slate-900 dark:text-slate-100">
 						{{ title }}
 					</span>
 				</slot>
@@ -127,22 +129,22 @@ const style = computed(() => {
 			</div>
         </header>
 
-		<main v-show="!minimized" class="min-h-0 flex-1 overflow-auto dark:text-slate-100">
+		<main v-show="!minimized" class="min-h-0 flex-1 overflow-auto text-slate-700 dark:text-slate-200">
             <slot />
         </main>
 
 		<div v-if="resizable && !maximized" class="absolute inset-0 pointer-events-none">
-			 <!-- North -->
-			<div class="pointer-events-auto absolute left-2 right-2 top-0 h-1 cursor-n-resize" @mousedown.stop="startResize($event, 'n')"></div>
+			<!-- North -->
+			<div class="pointer-events-auto absolute left-2 right-2 top-0 h-2 cursor-n-resize" @mousedown.stop="startResize($event, 'n')"></div>
 
 			<!-- South -->
-			<div class="pointer-events-auto absolute bottom-0 left-2 right-2 h-1 cursor-s-resize" @mousedown.stop="startResize($event, 's')"></div>
+			<div class="pointer-events-auto absolute bottom-0 left-2 right-2 h-2 cursor-s-resize" @mousedown.stop="startResize($event, 's')"></div>
 
 			<!-- East -->
-			<div class="pointer-events-auto absolute bottom-2 right-0 top-2 w-1 cursor-e-resize" @mousedown.stop="startResize($event, 'e')"></div>
+			<div class="pointer-events-auto absolute bottom-2 right-0 top-2 w-2 cursor-e-resize" @mousedown.stop="startResize($event, 'e')"></div>
 
 			<!-- West -->
-			<div class="pointer-events-auto absolute bottom-2 left-0 top-2 w-1 cursor-w-resize" @mousedown.stop="startResize($event, 'w')"></div>
+			<div class="pointer-events-auto absolute bottom-2 left-0 top-2 w-2 cursor-w-resize" @mousedown.stop="startResize($event, 'w')"></div>
 
 			<!-- North-East -->
 			<div class="pointer-events-auto absolute right-0 top-0 h-2 w-2 cursor-ne-resize" @mousedown.stop="startResize($event, 'ne')"></div>

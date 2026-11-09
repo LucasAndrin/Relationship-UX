@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import { useWindowManager, WindowManagerRenderer } from '@lib/core/window-manager';
 
 import {
@@ -50,21 +50,18 @@ function openTaskForm() {
 			width: 560,
 			height: 540,
 		},
-	})
+	});
 }
 
 const isDarkTheme = ref(false);
 function toggleTheme() {
 	isDarkTheme.value = !isDarkTheme.value;
-}
-
-watchEffect(() => {
 	if (isDarkTheme.value) {
 		document.body.classList.add('dark');
 	} else {
 		document.body.classList.remove('dark');
 	}
-})
+}
 
 /**
  * Tests Select.vue
@@ -78,7 +75,6 @@ const fruitOptions = [
     { label: 'Morango', value: 'strawberry' },
     { label: 'Abacaxi', value: 'pineapple', disabled: true },
 ];
-
 </script>
 
 <template>
@@ -113,7 +109,7 @@ const fruitOptions = [
 			</header>
 
 			<div v-if="isShowingWindows" class="relative min-h-0 flex-1">
-				<WindowManagerRenderer  />
+				<WindowManagerRenderer/>
 			</div>
 
 			<div v-else class="mx-auto flex max-w-5xl flex-col gap-12">
