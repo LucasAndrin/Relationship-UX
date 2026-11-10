@@ -28,9 +28,10 @@ const isOpen = ref(false);
 const isPopoverOpen = ref(false);
 const isShowingWindows = ref(false);
 
-const horizontalTab = ref('overview')
+/** Tests Tabs */
+const currentTab = ref('overview')
+const isHorizontalTab = ref(true);
 
-const verticalTab = ref('overview')
 
 const { open } = useWindowManager();
 
@@ -302,7 +303,6 @@ const fruitOptions = [
 					</Card>
 				</section>
 
-
 				<!-- Badge -->
 				<section class="flex flex-col gap-4">
 					<Text
@@ -352,7 +352,6 @@ const fruitOptions = [
 
 					</Surface>
 				</section>
-
 
 				<!-- Avatar -->
 				<section class="flex flex-col gap-4">
@@ -410,7 +409,6 @@ const fruitOptions = [
 
 					</Surface>
 				</section>
-
 
 				<!-- Divider -->
 				<section class="flex flex-col gap-4">
@@ -579,133 +577,68 @@ const fruitOptions = [
 						Testando o sistema de Tabs.
 					</p>
 
-					<div class="mt-8 rounded-lg border bg-white">
-						<Tabs v-model="horizontalTab" variant="ghost">
-							<TabList class="border-b">
-								<Tab value="overview">
-									Overview
-								</Tab>
-
-								<Tab value="relations">
-									Relations
-								</Tab>
-
-								<Tab value="history">
-									History
-								</Tab>
-							</TabList>
-
-							<div class="p-6">
-								<TabPanel value="overview">
-									<h2 class="text-xl font-semibold">
-										Overview
-									</h2>
-
-									<p class="mt-2 text-slate-600">
-										Informações gerais da
-										entidade.
-									</p>
-								</TabPanel>
-
-								<TabPanel value="relations">
-									<h2 class="text-xl font-semibold">
-										Relations
-									</h2>
-
-									<p class="mt-2 text-slate-600">
-										Relacionamentos dessa
-										entidade.
-									</p>
-								</TabPanel>
-
-								<TabPanel value="history">
-									<h2 class="text-xl font-semibold">
-										History
-									</h2>
-
-									<p class="mt-2 text-slate-600">
-										Histórico de alterações.
-									</p>
-								</TabPanel>
-							</div>
-						</Tabs>
+					<div class="flex gap-3">
+						<Text variant="label" for="isHorizontalTab">Horizontal?</Text>
+						<input v-model="isHorizontalTab" type="checkbox" name="isHorizontalTab">
 					</div>
+
+					<Tabs v-model="currentTab" variant="outlined" :orientation="isHorizontalTab ? 'horizontal' : 'vertical'">
+						<TabList>
+							<Tab value="overview">
+								Overview
+							</Tab>
+
+							<Tab value="relations">
+								Relations
+							</Tab>
+
+							<Tab value="history">
+								History
+							</Tab>
+						</TabList>
+
+						<div class="p-6">
+							<TabPanel value="overview">
+								<h2 class="text-xl font-semibold">
+									Overview
+								</h2>
+
+								<p class="mt-2 text-slate-600">
+									Informações gerais da
+									entidade.
+								</p>
+							</TabPanel>
+
+							<TabPanel value="relations">
+								<h2 class="text-xl font-semibold">
+									Relations
+								</h2>
+
+								<p class="mt-2 text-slate-600">
+									Relacionamentos dessa
+									entidade.
+								</p>
+							</TabPanel>
+
+							<TabPanel value="history">
+								<h2 class="text-xl font-semibold">
+									History
+								</h2>
+
+								<p class="mt-2 text-slate-600">
+									Histórico de alterações.
+								</p>
+							</TabPanel>
+						</div>
+					</Tabs>
 
 					<div class="mt-6">
 						<p class="text-sm text-slate-500">
 							Tab ativa:
 							<strong>
-								{{ horizontalTab }}
+								{{ currentTab }}
 							</strong>
 						</p>
-					</div>
-				</section>
-
-				<section class="flex flex-col gap-4">
-					<div class="mt-10 rounded-lg border bg-white">
-						<Tabs
-							v-model="verticalTab"
-							orientation="vertical"
-						>
-							<div class="flex">
-								<TabList
-									class="border-r"
-								>
-									<Tab value="overview">
-										Overview
-									</Tab>
-
-									<Tab value="relations">
-										Relations
-									</Tab>
-
-									<Tab
-										value="history"
-										disabled
-									>
-										History
-									</Tab>
-
-									<Tab value="settings">
-										Settings
-									</Tab>
-								</TabList>
-
-								<div class="flex-1 p-6">
-									<TabPanel value="overview">
-										<h2 class="text-xl font-semibold">
-											Overview
-										</h2>
-
-										<p class="mt-2 text-slate-600">
-											Visão geral.
-										</p>
-									</TabPanel>
-
-									<TabPanel value="relations">
-										<h2 class="text-xl font-semibold">
-											Relations
-										</h2>
-
-										<p class="mt-2 text-slate-600">
-											Relacionamentos.
-										</p>
-									</TabPanel>
-
-									<TabPanel value="history">
-										<h2 class="text-xl font-semibold">
-											History
-										</h2>
-									</TabPanel>
-
-									<TabPanel value="settings">
-										<h2 class="text-xl font-semibold">
-											Settings
-										</h2>
-									</TabPanel>
-								</div>
-							</div>
-						</Tabs>
 					</div>
 				</section>
 

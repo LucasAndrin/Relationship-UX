@@ -66,7 +66,7 @@ const classes = computed(() => {
 
     return cn(
         tabVariants.compose({ variant }),
-        variant === 'outlined' && orientation === 'vertical' ? 'border-b-0 border-l-2' : '',
+        variant === 'outlined' && orientation === 'vertical' ? 'border-b-0 border-r-2' : '',
         ...stateClasses[variant],
         props.disabled && 'cursor-not-allowed opacity-50',
         !props.disabled && 'cursor-pointer',

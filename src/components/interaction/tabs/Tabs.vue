@@ -36,15 +36,12 @@ const variant = computed<TabsVariant>(
 );
 
 const classes = computed(() => cn(
-	tabsVariants.compose(),
+	tabsVariants.compose(props),
 	props.class,
 ));
 
 function registerTab(value: string, element: HTMLElement, disabled: boolean) {
-	tabs.set(value, {
-		element,
-		disabled,
-	});
+	tabs.set(value, { element, disabled });
 }
 
 function unregisterTab(value: string) {
