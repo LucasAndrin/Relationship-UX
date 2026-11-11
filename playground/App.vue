@@ -19,6 +19,7 @@ import {
 	Popover,
 	Input,
 	Select,
+	Textarea,
 } from '@lib/components';
 
 import TaskForm from './components/TaskForm.vue';
@@ -65,9 +66,11 @@ function toggleTheme() {
 }
 
 /**
- * Tests Select.vue
+ * Form Components
  */
+const text = ref('');
 const selectedFruit = ref<string|null>(null);
+const selectedFruits = ref<string[]>([]);
 const fruitOptions = [
     { label: 'Maçã', value: 'apple' },
     { label: 'Banana', value: 'banana' },
@@ -155,7 +158,6 @@ const fruitOptions = [
 					</div>
 				</section>
 
-
 				<!-- Button -->
 				<section class="flex flex-col gap-4">
 					<Text
@@ -202,7 +204,6 @@ const fruitOptions = [
 						<Button loading>Loading</Button>
 					</Surface>
 				</section>
-
 
 				<!-- Text -->
 				<section class="flex flex-col gap-4">
@@ -389,7 +390,6 @@ const fruitOptions = [
 					</Surface>
 				</section>
 
-
 				<!-- Spinner -->
 				<section class="flex flex-col gap-4">
 					<Text
@@ -458,7 +458,6 @@ const fruitOptions = [
 					</Text>
 
 					<Card variant="outlined">
-
 						<template #header>
 							<div class="flex items-center gap-3">
 
@@ -516,7 +515,7 @@ const fruitOptions = [
 					</Card>
 				</section>
 
-				<section class="flex flex-col-gap-4">
+				<section class="flex flex-row gap-4">
 					<Button @click="isOpen = true">
 						Abrir Modal
 					</Button>
@@ -569,68 +568,217 @@ const fruitOptions = [
 				</section>
 
 				<section class="flex flex-col gap-4">
-					<h1 class="text-3xl font-bold">
-						Tabs Playground
-					</h1>
+					<Text as="h2" variant="subtitle">Form Components</Text>
 
-					<p class="mt-2 text-slate-600">
-						Testando o sistema de Tabs.
-					</p>
+					<Card>
+						<template #header>
+							<Text variant="subtitle">Inputs</Text>
+						</template>
 
-					<div class="flex gap-3">
-						<Text variant="label" for="isHorizontalTab">Horizontal?</Text>
-						<input v-model="isHorizontalTab" type="checkbox" name="isHorizontalTab">
-					</div>
+						<div class="flex flex-row gap-4">
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="inputFilled">Filled</Text>
+								<Input v-model="text" variant="filled" placeholder="Seu texto aqui" id="inputFilled" name="inputFilled"/>
+							</div>
 
-					<Tabs v-model="currentTab" variant="outlined" :orientation="isHorizontalTab ? 'horizontal' : 'vertical'">
-						<TabList>
-							<Tab value="overview">
-								Overview
-							</Tab>
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="inputOutlined">Outlined</Text>
+								<Input v-model="text" variant="outlined" placeholder="Seu texto aqui" id="inputOutlined" name="inputOutlined"/>
+							</div>
 
-							<Tab value="relations">
-								Relations
-							</Tab>
-
-							<Tab value="history">
-								History
-							</Tab>
-						</TabList>
-
-						<div class="p-6">
-							<TabPanel value="overview">
-								<h2 class="text-xl font-semibold">
-									Overview
-								</h2>
-
-								<p class="mt-2 text-slate-600">
-									Informações gerais da
-									entidade.
-								</p>
-							</TabPanel>
-
-							<TabPanel value="relations">
-								<h2 class="text-xl font-semibold">
-									Relations
-								</h2>
-
-								<p class="mt-2 text-slate-600">
-									Relacionamentos dessa
-									entidade.
-								</p>
-							</TabPanel>
-
-							<TabPanel value="history">
-								<h2 class="text-xl font-semibold">
-									History
-								</h2>
-
-								<p class="mt-2 text-slate-600">
-									Histórico de alterações.
-								</p>
-							</TabPanel>
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="inpuGhost">Ghost</Text>
+								<Input v-model="text" variant="ghost" placeholder="Seu texto aqui" id="inpuGhost" name="inpuGhost"/>
+							</div>
 						</div>
-					</Tabs>
+					</Card>
+
+					<Card>
+						<template #header>
+							<Text variant="subtitle">Textarea</Text>
+						</template>
+
+						<div class="flex flex-row gap-4">
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="textFilled">Filled</Text>
+								<Textarea v-model="text" variant="filled" placeholder="Seu texto aqui" id="textFilled" name="textFilled"/>
+							</div>
+
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="textOutlined">Outlined</Text>
+								<Textarea v-model="text" variant="outlined" placeholder="Seu texto aqui" id="textOutlined" name="textOutlined"/>
+							</div>
+
+							<div class="flex flex-col gap-2 w-full">
+								<Text as="label" variant="label" for="textGhost">Ghost</Text>
+								<Textarea v-model="text" variant="ghost" placeholder="Seu texto aqui" id="textGhost" name="textGhost"/>
+							</div>
+						</div>
+					</Card>
+
+					<Card>
+						<template #header>
+							<Text variant="subtitle">Select</Text>
+						</template>
+
+						<div class="flex flex-col gap-2">
+							<div class="flex flex-row gap-4">
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="selectFilled">Filled</Text>
+									<Select
+										v-model="selectedFruit"
+										:options="fruitOptions"
+										placeholder="Selecione uma fruta"
+										search-placeholder="Pesquisar frutas..."
+										variant="filled"
+										clearable
+										id="selectFilled"
+										name="selectFilled"
+									/>
+								</div>
+
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="selectOutlined">Outlined</Text>
+									<Select
+										v-model="selectedFruit"
+										:options="fruitOptions"
+										placeholder="Selecione uma fruta"
+										search-placeholder="Pesquisar frutas..."
+										variant="outlined"
+										clearable
+										id="selectOutlined"
+										name="selectOutlined"
+									/>
+								</div>
+
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="selectGhost">Ghost</Text>
+									<Select
+										v-model="selectedFruit"
+										:options="fruitOptions"
+										placeholder="Selecione uma fruta"
+										search-placeholder="Pesquisar frutas..."
+										variant="ghost"
+										clearable
+										id="selectGhost"
+										name="selectGhost"
+									/>
+								</div>
+							</div>
+
+							<div class="flex flex-row gap-4">
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="multiselectFilled">Filled (Multiple)</Text>
+									<Select
+										v-model="selectedFruits"
+										:options="fruitOptions"
+										placeholder="Selecione frutas"
+										search-placeholder="Pesquisar frutas..."
+										variant="filled"
+										clearable
+										id="multiselectFilled"
+										name="multiselectFilled"
+										multiple
+									/>
+								</div>
+
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="multiselectOutlined">Outlined (Multiple)</Text>
+									<Select
+										v-model="selectedFruits"
+										:options="fruitOptions"
+										placeholder="Selecione frutas"
+										search-placeholder="Pesquisar frutas..."
+										variant="outlined"
+										clearable
+										id="multiselectOutlined"
+										name="multiselectOutlined"
+										multiple
+									/>
+								</div>
+
+								<div class="flex flex-col gap-2 w-full">
+									<Text as="label" variant="label" for="multiselectGhost">Ghost (Multiple)</Text>
+									<Select
+										v-model="selectedFruits"
+										:options="fruitOptions"
+										placeholder="Selecione frutas"
+										search-placeholder="Pesquisar frutas..."
+										variant="ghost"
+										clearable
+										id="multiselectGhost"
+										name="multiselectGhost"
+										multiple
+									/>
+								</div>
+							</div>
+						</div>
+					</Card>
+				</section>
+
+				<section class="flex flex-col gap-4">
+					<Card>
+						<template>
+							<Text as="h2" variant="subtitle">
+								Tabs
+							</Text>
+						</template>
+
+						<div class="flex gap-3">
+							<Text variant="label" for="isHorizontalTab">Horizontal?</Text>
+							<input v-model="isHorizontalTab" type="checkbox" name="isHorizontalTab">
+						</div>
+
+						<Tabs v-model="currentTab" variant="outlined" :orientation="isHorizontalTab ? 'horizontal' : 'vertical'">
+							<TabList>
+								<Tab value="overview">
+									Overview
+								</Tab>
+
+								<Tab value="relations">
+									Relations
+								</Tab>
+
+								<Tab value="history">
+									History
+								</Tab>
+							</TabList>
+
+							<div class="p-6">
+								<TabPanel value="overview">
+									<h2 class="text-xl font-semibold">
+										Overview
+									</h2>
+
+									<p class="mt-2 text-slate-600">
+										Informações gerais da
+										entidade.
+									</p>
+								</TabPanel>
+
+								<TabPanel value="relations">
+									<h2 class="text-xl font-semibold">
+										Relations
+									</h2>
+
+									<p class="mt-2 text-slate-600">
+										Relacionamentos dessa
+										entidade.
+									</p>
+								</TabPanel>
+
+								<TabPanel value="history">
+									<h2 class="text-xl font-semibold">
+										History
+									</h2>
+
+									<p class="mt-2 text-slate-600">
+										Histórico de alterações.
+									</p>
+								</TabPanel>
+							</div>
+						</Tabs>
+					</Card>
 
 					<div class="mt-6">
 						<p class="text-sm text-slate-500">
@@ -640,22 +788,6 @@ const fruitOptions = [
 							</strong>
 						</p>
 					</div>
-				</section>
-
-				<section class="flex flex-col gap-4">
-					<Text as="h2" variant="subtitle">Form</Text>
-
-					<Surface class="flex flex-col gap-2 p-3">
-						<Select
-							v-model="selectedFruit"
-							:options="fruitOptions"
-							placeholder="Selecione uma fruta"
-							search-placeholder="Pesquisar frutas..."
-							clearable
-						/>
-
-						<Input placeholder="teste" />
-					</Surface>
 				</section>
 			</div>
 		</div>

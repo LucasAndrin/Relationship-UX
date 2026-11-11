@@ -19,11 +19,12 @@ const props = withDefaults(defineProps<SelectProps>(), {
     rounded: 'md',
     disabled: false,
     clearable: false,
+    multiple: false,
 });
 
 const emit = defineEmits<{
-    'update:modelValue': [value: SelectOptionValue | null]
-    change: [option: SelectOption | null]
+    'update:modelValue': [value: SelectOptionValue | SelectOptionValue[] | null]
+    change: [option: SelectOption | SelectOption[] | null]
 }>();
 
 const attrs = useAttrs();
@@ -36,9 +37,26 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 const instanceId = getCurrentInstance()!.uid;
 const listboxId = `select-listbox-${instanceId}`;
 
-const selectedOption = computed(() => {
-    return props.options.find(option => option.value === props.modelValue);
+const selectedValues = computed<SelectOptionValue[]>(() => {
+    if (Array.isArray(props.modelValue)) {
+        return props.modelValue;
+    }
+    return props.modelValue != null ? [props.modelValue] : [];
 });
+
+const selectedOptions = computed(() => {
+    return props.options.filter(option =>
+        selectedValues.value.includes(option.value)
+    );
+});
+
+const displayValue = computed(() => {
+    return selectedOptions.value.map(option => option.label).join(', ');
+});
+
+function optionIsSelected(option: SelectOption) {
+    return selectedValues.value.includes(option.value);
+}
 
 const filteredOptions = computed(() => {
     const query = normalize(search.value.trim());
@@ -48,33 +66,52 @@ const filteredOptions = computed(() => {
     return props.options.filter(option => normalize(option.label).includes(query));
 });
 
+function normalize(value: string) {
+    return value.normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase();
+}
+
 const classes = computed(() => cn(
     selectVariants.compose(props),
     props.class,
 ));
 
-function normalize(value: string) {
-    return value.normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase();
-}
-
 function firstEnabledIndex() {
     return filteredOptions.value.findIndex(option => !option.disabled)
 }
 
-function selectOption(option: SelectOption) {
+function toggleOption(option: SelectOption) {
     if (option.disabled) return;
 
-    emit('update:modelValue', option.value);
-    emit('change', option);
+    if (props.multiple) {
+        const values = [...selectedValues.value];
+        const index = values.indexOf(option.value);
+        if (index >= 0) {
+            values.splice(index, 1);
+        } else {
+            values.push(option.value);
+        }
 
-    isPopoverOpen.value = false;
+        const options = props.options.filter(item => values.includes(item.value));
+
+        emit('update:modelValue', values);
+        emit('change', options);
+    } else {
+        emit('update:modelValue', option.value);
+        emit('change', option);
+        isPopoverOpen.value = false;
+    }
 }
 
 function clearSelection() {
-    emit('update:modelValue', null);
-    emit('change', null);
+    if (props.multiple) {
+        emit('update:modelValue', []);
+        emit('change', []);
+    } else {
+        emit('update:modelValue', null);
+        emit('change', null);
+    }
 }
 
 function moveActive(direction: 1 | -1) {
@@ -110,7 +147,7 @@ function handleSearchKeydown(event: KeyboardEvent) {
             event.preventDefault();
             const option = filteredOptions.value[activeIndex.value];
             if (option) {
-                selectOption(option);
+                toggleOption(option);
             }
             break;
         }
@@ -137,7 +174,7 @@ watch(search, () => {
     activeIndex.value = firstEnabledIndex();
 });
 
-watch(isPopoverOpen, async (open) => {
+watch(isPopoverOpen, async open => {
     if (open) {
         activeIndex.value = firstEnabledIndex();
 
@@ -175,14 +212,14 @@ watch(isPopoverOpen, async (open) => {
             >
                 <span
                     class="min-w-0 flex-1 truncate text-left"
-                    :class="{ 'text-slate-400 dark:text-slate-500': !selectedOption }"
+                    :class="{ 'text-slate-400 dark:text-slate-500': !selectedOptions.length }"
                 >
-                    {{ selectedOption?.label ?? placeholder }}
+                    {{ displayValue || placeholder }}
                 </span>
 
                 <span class="flex shrink-0 items-center gap-2">
                     <span
-                        v-if="clearable && selectedOption"
+                        v-if="clearable && selectedOptions.length"
                         class="cursor-pointer text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                         role="button"
                         aria-label="Limpar seleção"
@@ -249,6 +286,7 @@ watch(isPopoverOpen, async (open) => {
             <div
                 :id="listboxId"
                 role="listbox"
+                :aria-multiselectable="multiple || undefined"
                 class="max-h-60 overflow-y-auto"
             >
                 <template v-if="filteredOptions.length">
@@ -259,10 +297,10 @@ watch(isPopoverOpen, async (open) => {
                         type="button"
                         role="option"
                         :disabled="option.disabled"
-                        :aria-selected="option.value === modelValue"
+                        :aria-selected="optionIsSelected(option)"
                         class="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                         :class="[
-                            option.value === modelValue
+                            optionIsSelected(option)
                                 ? 'bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-slate-100'
                                 : 'text-slate-700 dark:text-slate-200',
 
@@ -271,13 +309,13 @@ watch(isPopoverOpen, async (open) => {
                                 : 'hover:bg-slate-50 dark:hover:bg-slate-800',
                         ]"
                         @mouseenter="activeIndex = index"
-                        @click="selectOption(option)"
+                        @click="toggleOption(option)"
                     >
                         <span class="truncate">
                             {{ option.label }}
                         </span>
 
-                        <svg v-if="option.value === modelValue"
+                        <svg v-if="optionIsSelected(option)"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="none"

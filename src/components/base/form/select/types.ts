@@ -25,7 +25,7 @@ export type SelectRounded =
 
 export type SelectProps = {
     class?: string
-    modelValue?: SelectOptionValue | null
+    modelValue?: SelectOptionValue | SelectOptionValue[] | null
     options: SelectOption[]
 
     placeholder?: string
@@ -33,9 +33,10 @@ export type SelectProps = {
     emptyText?: string
 
     variant?: SelectVariant
-    size?: SelectSize
     rounded?: SelectRounded
+    size?: SelectSize
 
     disabled?: boolean
+    multiple?: boolean
     clearable?: boolean
 }
