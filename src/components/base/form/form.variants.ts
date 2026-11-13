@@ -28,6 +28,12 @@ export const inputBaseClasses = [
     'block',
 ]
 
+export const inputBaseInvalidClasses = [
+    'border-red-500!',
+    'focus-visible:border-red-500!',
+    'focus-visible:ring-red-500/20!',
+];
+
 export const inputVariantFilledClasses = [
     'border',
     'border-slate-200',

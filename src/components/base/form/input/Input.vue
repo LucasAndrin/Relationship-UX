@@ -8,8 +8,6 @@ const props = withDefaults(
 	defineProps<InputProps>(),
 	{
 		type: 'text',
-		disabled: false,
-		readonly: false,
 		invalid: false,
 	},
 )
@@ -18,21 +16,10 @@ const emit = defineEmits<{
   	'update:modelValue': [value: string]
 }>()
 
-const classes = computed(() => {
-	const invalidClasses = [];
-	if (props.invalid) {
-		invalidClasses.push(...[
-			'border-red-500',
-			'focus-visible:border-red-500',
-			'focus-visible:ring-red-500/20',
-		]);
-	}
-	return cn(
-		inputVariants.compose(props),
-		props.class,
-		...invalidClasses,
-	)
-})
+const classes = computed(() => cn(
+	inputVariants.compose(props),
+	props.class,
+))
 
 function handleInput(event: Event) {
 	const target = event.target as HTMLInputElement
@@ -45,8 +32,6 @@ function handleInput(event: Event) {
 	<input
 		:type="type"
 		:value="modelValue"
-		:disabled="disabled"
-		:readonly="readonly"
 		:aria-invalid="invalid || undefined"
 		:class="classes"
 		@input="handleInput"

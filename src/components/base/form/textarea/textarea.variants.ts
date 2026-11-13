@@ -1,5 +1,5 @@
 import { createVariants } from '@lib/utils';
-import { inputBaseClasses, inputVariantFilledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants';
+import { inputBaseClasses, inputBaseInvalidClasses, inputVariantFilledClasses, inputVariantGhostClasses, inputVariantOutlinedClasses } from '../form.variants';
 
 export const textareaVariants = createVariants({
     base: [
@@ -15,26 +15,9 @@ export const textareaVariants = createVariants({
         },
 
         size: {
-            sm: [
-                'min-h-16',
-                'px-3',
-                'py-2',
-                'text-sm',
-            ],
-
-            md: [
-                'min-h-24',
-                'px-3',
-                'py-2',
-                'text-sm',
-            ],
-
-            lg: [
-                'min-h-32',
-                'px-4',
-                'py-3',
-                'text-base',
-            ],
+            sm: ['min-h-16', 'px-3', 'py-2', 'text-sm'],
+            md: ['min-h-24', 'px-3', 'py-2', 'text-sm'],
+            lg: ['min-h-32', 'px-4', 'py-3', 'text-base'],
         },
 
         rounded: {
@@ -44,6 +27,11 @@ export const textareaVariants = createVariants({
             lg: 'rounded-lg',
             full: 'rounded-2xl',
         },
+
+        invalid: {
+            true: inputBaseInvalidClasses,
+            false: [],
+        }
     },
 
     defaultVariants: {

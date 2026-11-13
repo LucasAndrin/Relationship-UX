@@ -15,21 +15,10 @@ const emit = defineEmits<{
   	'update:modelValue': [value: string]
 }>()
 
-const classes = computed(() => {
-	const invalidClasses = [];
-	if (props.invalid) {
-		invalidClasses.push(...[
-			'border-red-500',
-			'focus-visible:border-red-500',
-			'focus-visible:ring-red-500/20',
-		]);
-	}
-	return cn(
-		textareaVariants.compose(props),
-		props.class,
-		...invalidClasses,
-	)
-})
+const classes = computed(() => cn(
+	textareaVariants.compose(props),
+	props.class,
+));
 
 function handleInput(event: Event) {
 	const target = event.target as HTMLTextAreaElement

@@ -293,7 +293,7 @@ watch(isPopoverOpen, async open => {
                     <button
                         v-for="(option, index) in filteredOptions"
                         :id="`${listboxId}-option-${index}`"
-                        :key="option.value"
+                        :key="index"
                         type="button"
                         role="option"
                         :disabled="option.disabled"

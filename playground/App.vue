@@ -569,7 +569,7 @@ const fruitOptions = [
 
 				<section class="flex flex-col gap-4">
 					<Text as="h2" variant="subtitle">Form Components</Text>
-
+					...
 					<Card>
 						<template #header>
 							<Text variant="subtitle">Inputs</Text>
@@ -578,7 +578,7 @@ const fruitOptions = [
 						<div class="flex flex-row gap-4">
 							<div class="flex flex-col gap-2 w-full">
 								<Text as="label" variant="label" for="inputFilled">Filled</Text>
-								<Input v-model="text" variant="filled" placeholder="Seu texto aqui" id="inputFilled" name="inputFilled"/>
+								<Input v-model="text" variant="filled" placeholder="Seu texto aqui" id="inputFilled" name="inputFilled" invalid/>
 							</div>
 
 							<div class="flex flex-col gap-2 w-full">
@@ -592,7 +592,7 @@ const fruitOptions = [
 							</div>
 						</div>
 					</Card>
-
+					...
 					<Card>
 						<template #header>
 							<Text variant="subtitle">Textarea</Text>
@@ -601,7 +601,7 @@ const fruitOptions = [
 						<div class="flex flex-row gap-4">
 							<div class="flex flex-col gap-2 w-full">
 								<Text as="label" variant="label" for="textFilled">Filled</Text>
-								<Textarea v-model="text" variant="filled" placeholder="Seu texto aqui" id="textFilled" name="textFilled"/>
+								<Textarea v-model="text" variant="filled" placeholder="Seu texto aqui" id="textFilled" name="textFilled" invalid/>
 							</div>
 
 							<div class="flex flex-col gap-2 w-full">
@@ -615,7 +615,7 @@ const fruitOptions = [
 							</div>
 						</div>
 					</Card>
-
+					...
 					<Card>
 						<template #header>
 							<Text variant="subtitle">Select</Text>
@@ -714,6 +714,7 @@ const fruitOptions = [
 							</div>
 						</div>
 					</Card>
+					...
 				</section>
 
 				<section class="flex flex-col gap-4">

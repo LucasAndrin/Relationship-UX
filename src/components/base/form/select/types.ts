@@ -1,4 +1,4 @@
-export type SelectOptionValue = string | number
+export type SelectOptionValue = string | number | object
 
 export type SelectOption = {
     label: string
@@ -36,6 +36,7 @@ export type SelectProps = {
     rounded?: SelectRounded
     size?: SelectSize
 
+    invalid?: boolean
     disabled?: boolean
     multiple?: boolean
     clearable?: boolean

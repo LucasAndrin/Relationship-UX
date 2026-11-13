@@ -2,6 +2,7 @@ import { createVariants } from '@lib/utils'
 
 import {
     formControlBaseClasses,
+    inputBaseInvalidClasses,
     inputVariantFilledClasses,
     inputVariantGhostClasses,
     inputVariantOutlinedClasses,
@@ -28,23 +29,11 @@ export const selectVariants = createVariants({
         },
 
         size: {
-            sm: [
-                'min-h-8',
-                'px-3',
-                'text-sm',
-            ],
+            sm: ['min-h-8', 'px-3', 'text-sm'],
 
-            md: [
-                'min-h-10',
-                'px-3',
-                'text-sm',
-            ],
+            md: ['min-h-10', 'px-3', 'text-sm'],
 
-            lg: [
-                'min-h-12',
-                'px-4',
-                'text-base',
-            ],
+            lg: ['min-h-12', 'px-4', 'text-base'],
         },
 
         rounded: {
@@ -54,6 +43,11 @@ export const selectVariants = createVariants({
             lg: 'rounded-lg',
             full: 'rounded-full',
         },
+
+        invalid: {
+            true: inputBaseInvalidClasses,
+            false: [],
+        }
     },
 
     defaultVariants: {
