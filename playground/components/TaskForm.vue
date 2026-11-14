@@ -20,7 +20,6 @@ const form = reactive({
 
 async function selectResponsible() {
 	await relationshipService.open(props.task, 'responsible', {
-		mode: 'select',
 		props: {
 			ignoreResponsibleStatus,
 			onSelect: (responsibles: Responsible[]) => {

@@ -1,15 +1,10 @@
-import type { Component } from 'vue'
-
-import type { EntityConstructor, RelationshipOpenOptions, RelationshipPresentationContext, RelationshipReference } from '../types'
+import type { EntityConstructor, RelationshipPresentationContext, RelationshipReference } from '../types'
 
 import { RelationshipResolver } from './RelationshipResolver'
-import type { WindowId, WindowManagerService } from '../../window-manager';
+import type { WindowId, WindowManagerService, WindowOptions } from '../../window-manager';
 
 type RelationshipOwner<TSource extends object> = EntityConstructor<TSource> & {
-	relationships: Record<
-		string,
-		RelationshipReference<unknown>
-	>
+	relationships: Record<string, RelationshipReference<unknown>>
 }
 
 export class RelationshipService {
@@ -21,15 +16,13 @@ export class RelationshipService {
 	async open<TSource extends object>(
 		source: TSource,
 		relationshipName: string,
-		options: RelationshipOpenOptions = {},
+		options: Omit<WindowOptions, 'component'> = {},
 	): Promise<WindowId> {
 		const owner = source.constructor as RelationshipOwner<TSource>
 		const reference = owner.relationships?.[relationshipName]
 
 		if (!reference) {
-			throw new Error(
-				`Relationship "${relationshipName}" is not defined.`,
-			)
+			throw new Error(`Relationship "${relationshipName}" is not defined.`);
 		}
 
 		const customProps = options.props ?? {}
@@ -40,7 +33,6 @@ export class RelationshipService {
 			source,
 			definition,
 			targetEntity,
-			mode: options.mode,
 			props: customProps,
 		}
 
@@ -50,15 +42,14 @@ export class RelationshipService {
 		return this.windowManager.open({
 			title: definition.name,
 			component,
+			...options,
 			props: {
 				...customProps,
 				...presentationProps,
-				mode: context.mode,
 				source: context.source,
 				relationship: definition,
 				targetEntity: context.targetEntity,
 			},
-			overlay: options.overlay,
 		});
 	}
 }

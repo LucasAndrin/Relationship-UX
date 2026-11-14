@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { RelationshipMode } from '@lib/core/relationships';
 import { Responsible } from '../entities/Responsible';
 import { DataTable, type DataTableColumn, type DataTableRowKey, type DataTableSort } from '@lib/components';
 
 const props = defineProps<{
-	mode: RelationshipMode
 	ignoreResponsibleStatus: boolean,
 	onSelect?: (selectedResponsibles: Responsible[]) => void
 }>();

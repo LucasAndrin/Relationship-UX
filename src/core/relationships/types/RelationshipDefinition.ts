@@ -7,10 +7,7 @@ export type EntityConstructor<TEntity = unknown> = abstract new (...args: never[
 
 export type AsyncEntityResolver<TEntity = unknown> = () => Promise<EntityConstructor<TEntity>>;
 
-export type RelationshipMode = undefined|null|string
-
 export type RelationshipPresentationContext<TTarget = unknown> = {
-	mode: RelationshipMode
 	props: Record<string, unknown>
 	source: unknown
 	definition: RelationshipDefinition<TTarget>
@@ -27,10 +24,4 @@ export type RelationshipDefinition<TTarget = unknown> = {
 	getProps?: (
 		context: RelationshipPresentationContext<TTarget>,
 	) => Record<string, unknown>
-}
-
-export type RelationshipOpenOptions = {
-	mode?: RelationshipMode
-	props?: Record<string, unknown>
-	overlay?: WindowOverlayOptions
 }
