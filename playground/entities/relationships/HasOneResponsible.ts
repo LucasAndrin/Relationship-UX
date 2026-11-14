@@ -12,11 +12,7 @@ export default defineRelationship<Responsible>({
 		return module.Responsible;
 	},
 
-	// getValue(task) {
-	// 	return task.responsible;
-	// },
-
-	resolveComponent() {
+	resolveComponent(context) {
 		return import('@/components/ResponsiblesList.vue');
 	},
 

@@ -17,7 +17,7 @@ function toggleTheme() {
 	}
 }
 
-const { open } = useWindowManager();
+const { windows, open, focus } = useWindowManager();
 
 function openMessage() {
 	open({
@@ -29,6 +29,9 @@ function openMessage() {
 		size: {
 			width: 560,
 			height: 540,
+		},
+		overlay: {
+			enabled: true,
 		},
 	});
 }
@@ -47,12 +50,23 @@ function openMessage() {
 						<Button variant="outlined" @click="toggleTheme">
 							{{ isDarkTheme ? 'Tema claro' : 'Tema escuro' }}
 						</Button>
+
+						{{ windows.length }}
 					</div>
+				</div>
+
+				<div class="flex items-center gap-3">
+					<Button v-for="window in windows" :key="window.id"
+						variant="outlined"
+						@click="focus(window.id)"
+					>
+						{{ window.title }}
+					</Button>
 				</div>
 			</header>
 
 			<div class="relative min-h-0 flex-1">
-				<WindowManagerRenderer variant="outlined"/>
+				<WindowManagerRenderer/>
 			</div>
 		</div>
   	</div>
