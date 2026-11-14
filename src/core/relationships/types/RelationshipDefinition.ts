@@ -9,10 +9,6 @@ export type AsyncEntityResolver<TEntity = unknown> = () => Promise<EntityConstru
 
 export type RelationshipMode = undefined|null|string
 
-export type ComponentModule = {
-  	default: Component
-}
-
 export type RelationshipPresentationContext<TTarget = unknown> = {
 	mode: RelationshipMode
 	props: Record<string, unknown>
@@ -26,7 +22,7 @@ export type RelationshipDefinition<TTarget = unknown> = {
 	cardinality: RelationshipCardinality
 	resolveEntity: AsyncEntityResolver<TTarget>
 
-	resolveComponent(context: RelationshipPresentationContext<TTarget>): Promise<ComponentModule>,
+	resolveComponent(context: RelationshipPresentationContext<TTarget>): Promise<Component>,
 
 	getProps?: (
 		context: RelationshipPresentationContext<TTarget>,

@@ -12,8 +12,9 @@ export default defineRelationship<Responsible>({
 		return module.Responsible;
 	},
 
-	resolveComponent(context) {
-		return import('@/components/ResponsiblesList.vue');
+	async resolveComponent(context) {
+		const module = await import('@/components/ResponsiblesList.vue');
+		return module.default;
 	},
 
 	getProps(context) {

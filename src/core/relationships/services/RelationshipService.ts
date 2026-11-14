@@ -45,8 +45,7 @@ export class RelationshipService {
 		}
 
 		const presentationProps = definition.getProps?.(context) ?? {};
-		const componentModule = await definition.resolveComponent(context);
-		const component: Component = componentModule.default;
+		const component = await definition.resolveComponent(context);
 
 		return this.windowManager.open({
 			title: definition.name,
